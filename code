@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+long long n, v[500000], x[51], i, j, k = 0, d, numardivizori = 1, exponent;
+char prim[3165001];
+
+int main()
+{
+    ifstream fin("nrdiv.in");
+    ofstream fout("nrdiv.out");
+    
+    fin >> n;
+    
+    int y = sqrt(n);
+    
+    for(i = 2; i <= y; i ++)
+    {
+        if(prim[i] == 0)
+        {
+            
+        k ++;
+        v[k] = i;
+            
+            for(j = 2; i * j <= y; j ++)
+            {
+                prim[i * j] = 1;
+            }
+            
+        }
+    }
+    
+       
+    for(d = 1; d <= k and n > 1; d ++)
+    {
+        while(n % v[d] == 0)
+        {
+            exponent ++;
+            n = n / v[d];
+        }
+            
+        numardivizori = numardivizori * (exponent + 1);
+        exponent = 0;
+    }
+        
+    if(n != 1)
+    {
+        numardivizori = numardivizori * 2;
+    }
+        
+    fout << numardivizori << '\n';
+
+    return 0;
+}
